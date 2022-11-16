@@ -51,3 +51,7 @@ class Leg {
             set_overall_leg(overall_leg_length, overall_leg_angle);
         }
 }
+
+class Quad {
+    
+}
