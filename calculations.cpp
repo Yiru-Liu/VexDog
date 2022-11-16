@@ -19,14 +19,22 @@ class Leg {
             knee_motor = knee;
         }
 
+        void set_hip(double angle) {
+            hip_motor.setPosition(angle, degrees);
+        }
+
+        void set_knee(double angle) {
+            knee_motor.setPosition(angle, degrees);
+        }
+
         void set_overall_leg(double length, double angle) {
             double knee_angle = 2 * asin(length / (2 * LEG_PART_LENGTH));
             double hip_angle = 90 - knee_angle/2;
             knee_angle -= 180.0;    // So the angle is 0 when the leg is straight
             knee_angle *= -1.0;     // Knee typically bends backwards
             hip_angle += angle;     // Bend overall leg
-            hip_motor.setPosition(hip_angle, degrees);
-            knee_motor.setPosition(knee_angle, degrees);
+            set_hip(hip_angle);
+            set_knee(knee_angle);
         }
 
         void set_foot_position(double x, double y) {
