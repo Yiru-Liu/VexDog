@@ -11,14 +11,22 @@
 const int LEG_PART_LENGTH = 6.4375;
 
 class Leg {
+    motor hip_motor, knee_motor;
+
     public:
+        Leg(motor hip, motor knee) {
+            hip_motor = hip;
+            knee_motor = knee;
+        }
+
         void set_overall_leg(double length, double angle) {
             double knee_angle = 2 * asin(length / (2 * LEG_PART_LENGTH));
             double hip_angle = 90 - knee_angle/2;
             knee_angle -= 180.0;    // So the angle is 0 when the leg is straight
             knee_angle *= -1.0;     // Knee typically bends backwards
             hip_angle += angle;     // Bend overall leg
-            // TODO: Actuate motors
+            hip_motor.setPosition(hip_angle, degrees);
+            knee_motor.setPosition(knee_angle, degrees);
         }
 
         void set_foot_position(double x, double y) {
