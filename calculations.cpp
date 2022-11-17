@@ -53,13 +53,39 @@ class Leg {
 }
 
 class Quad {
-    Leg front_left, front_right, back_left, back_right;
+    Leg legs[4];
+    /* 0 - Front Left
+       1 - Front Right
+       2 - Back Left
+       3 - Back Right */
+
+    double body_x, body_y;
+
+    const double INITIAL_BODY_Y = 10;
+    const double INITIAL_BODY_X = 0;
 
     public:
         Quad(motor front_left_hip, motor front_left_knee, motor front_right_hip, motor front_right_knee, motor back_left_hip, motor back_left_knee, motor back_right_hip, motor back_right_knee) {
-            front_left = Leg(front_left_hip, front_left_knee);
-            front_right = Leg(front_right_hip, front_right_knee);
-            back_left = Leg(back_left_hip, back_left_knee);
-            back_right = Leg(back_right_hip, back_right_knee);
+            legs[0] = Leg(front_left_hip, front_left_knee);
+            legs[1] = Leg(front_right_hip, front_right_knee);
+            legs[2] = Leg(back_left_hip, back_left_knee);
+            legs[3] = Leg(back_right_hip, back_right_knee);
+            set_body_x(INITIAL_BODY_X);
+            set_body_y(INITIAL_BODY_X);
+            update_body();
+        }
+
+        void set_body_x(double x) {
+            body_x = x;
+        }
+
+        void set_body_y(double y) {
+            body_y = y;
+        }
+
+        void update_body() {
+            for(Leg leg : legs) {
+                leg.set_foot_position(-body_x, -body_y);
+            }
         }
 }
