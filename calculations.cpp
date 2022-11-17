@@ -53,5 +53,13 @@ class Leg {
 }
 
 class Quad {
-    
+    Leg front_left, front_right, back_left, back_right;
+
+    public:
+        Quad(motor front_left_hip, motor front_left_knee, motor front_right_hip, motor front_right_knee, motor back_left_hip, motor back_left_knee, motor back_right_hip, motor back_right_knee) {
+            front_left = Leg(front_left_hip, front_left_knee);
+            front_right = Leg(front_right_hip, front_right_knee);
+            back_left = Leg(back_left_hip, back_left_knee);
+            back_right = Leg(back_right_hip, back_right_knee);
+        }
 }
