@@ -8,6 +8,10 @@
 # x - front of robot is positive, back of robot is negative
 # y - up is positive, down is negative
 
+import math
+
+LEG_PART_LENGTH = 6.4375
+
 class Leg:
     def __init__(self) -> None:
         self.hip_angle, self.knee_angle = 0, 0
@@ -29,4 +33,18 @@ class Leg:
         self.move_knee_event.broadcast();
 
     def set_overall_leg(self, length, angle) -> None:
+        knee_angle = 2 * math.asin(length / (2 * LEG_PART_LENGTH))
+        hip_angle = 90 - knee_angle/2
+        knee_angle -= 180   # So the angle is 0 when the leg is straight
+        knee_angle *= -1    # Knee typically bends backwards
+        hip_angle += angle  # Bend overall leg
 
+        self.hip_angle = hip_angle
+        self.knee_angle = knee_angle
+
+        self.update_leg()
+
+    def set_foot_position(x, y) -> None:
+        overall_leg_length = math.sqrt(x*x + y*y)
+        overall_leg_angle = math.atan(x / -y)
+        self.set_overall_leg(overall_leg_length, overall_leg_angle)
