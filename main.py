@@ -1,6 +1,8 @@
 # Angles are 0 when the leg is completely straight
 # Positive when bent toward the front of the robot
 # Negative when bent toward the back of the robot
+# So in order to do this, the directions of the motors on the left side of the
+# need to be reversed
 
 # Distances are in inches
 # x - front of robot is positive, back of robot is negative
@@ -27,4 +29,4 @@ class Leg:
         self.move_knee_event.broadcast();
 
     def set_overall_leg(self, length, angle) -> None:
-        
+
