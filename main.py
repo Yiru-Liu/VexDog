@@ -72,3 +72,13 @@ class Quad:
             leg.set_foot_position(-self.body_x, -self.body_y)
         for leg in self.legs:
             leg.update_leg()
+
+
+def main():
+    fl = (motor_1, motor_2)
+    fr = (motor_3, motor_4)
+    bl = (motor_11, motor_12)
+    br = (motor_13, motor_14)
+
+
+main()
