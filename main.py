@@ -13,14 +13,14 @@ import math
 LEG_PART_LENGTH = 6.4375
 
 class Leg:
-    def __init__(self) -> None:
+    def __init__(self, hip_motor, knee_motor) -> None:
         self.hip_angle, self.knee_angle = 0, 0
-        self.hip_motor = hip
-        self.knee_motor = knee
+        self.hip_motor = hip_motor
+        self.knee_motor = knee_motor
         self.move_hip_event = Event()
-        self.move_hip_event(set_hip)
+        self.move_hip_event(self.set_hip)
         self.move_knee_event = Event()
-        self.move_knee_event(set_knee)
+        self.move_knee_event(self.set_knee)
 
     def set_hip(self) -> None:
         self.hip_motor.spin_to_position(self.hip_angle, DEGREES, wait=False)
@@ -44,7 +44,7 @@ class Leg:
 
         self.update_leg()
 
-    def set_foot_position(x, y) -> None:
+    def set_foot_position(self, x, y) -> None:
         overall_leg_length = math.sqrt(x*x + y*y)
         overall_leg_angle = math.atan(x / -y)
         self.set_overall_leg(overall_leg_length, overall_leg_angle)
