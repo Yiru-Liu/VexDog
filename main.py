@@ -70,3 +70,5 @@ class Quad:
     def update_body(self) -> None:
         for leg in self.legs:
             leg.set_foot_position(-self.body_x, -self.body_y)
+        for leg in self.legs:
+            leg.update_leg()
