@@ -16,7 +16,9 @@ class Leg:
     def __init__(self, hip_motor, knee_motor) -> None:
         self.hip_angle, self.knee_angle = 0, 0
         self.hip_motor = hip_motor
+        self.hip_motor.set_stopping(HOLD)
         self.knee_motor = knee_motor
+        self.knee_motor.set_stopping(HOLD)
         self.move_hip_event = Event()
         self.move_hip_event(self.set_hip)
         self.move_knee_event = Event()
@@ -48,3 +50,23 @@ class Leg:
         overall_leg_length = math.sqrt(x*x + y*y)
         overall_leg_angle = math.atan(x / -y)
         self.set_overall_leg(overall_leg_length, overall_leg_angle)
+
+
+INITIAL_BODY_Y = 10
+INITIAL_BODY_X = 0
+
+class Quad:
+    def __init__(self, front_left, front_right, back_left, back_right) -> None:
+        self.legs = {
+            "FL": Leg(*front_left),
+            "FR": Leg(*front_right),
+            "BL": Leg(*back_left),
+            "BR": Leg(*back_right)
+        }
+        self.body_x = INITIAL_BODY_X
+        self.body_y = INITIAL_BODY_Y
+        self.update_body()
+
+    def update_body(self) -> None:
+        for leg in self.legs:
+            leg.set_foot_position(-self.body_x, -self.body_y)
