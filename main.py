@@ -79,6 +79,7 @@ def main():
     fr = (motor_3, motor_4)
     bl = (motor_11, motor_12)
     br = (motor_13, motor_14)
+    quad = Quad(fl, fr, bl, br)
 
 
 main()
