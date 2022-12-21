@@ -8,7 +8,7 @@
 
 #include <cmath>
 
-const int LEG_PART_LENGTH = 6.4375;
+const double LEG_PART_LENGTH = 6.4375;
 
 class Leg {
     volatile double hip_angle, knee_angle;
