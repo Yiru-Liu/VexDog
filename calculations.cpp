@@ -1,3 +1,5 @@
+// NOTE: DO NOT USE
+
 // Angles are 0 when the leg is completely straight
 // Positive when bent toward the front of the robot
 // Negative when bent toward the back of the robot
