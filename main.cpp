@@ -8,9 +8,8 @@
 
 #include <cmath>
 
-const double LEG_PART_LENGTH = 6.4375;
-
 class Leg {
+    const double LEG_PART_LENGTH = 6.4375;
     double hip_angle, knee_angle;
     motor& hip_motor, knee_motor;
 
@@ -36,3 +35,14 @@ public:
         knee_motor.spinToPosition(knee_angle, degrees, false);
     }
 };
+
+class Quad {
+    const double INITIAL_BODY_X = 0;
+    const double INITIAL_BODY_Y = 10;
+
+public:
+    Quad(motor& front_left_hip, motor& front_left_knee,
+         motor& front_right_hip, motor& front_right_knee,
+         motor& back_left_hip, motor& back_left_knee,
+         motor& back_right_hip, motor& back_right_knee)
+}
