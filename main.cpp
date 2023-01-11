@@ -39,10 +39,37 @@ public:
 class Quad {
     const double INITIAL_BODY_X = 0;
     const double INITIAL_BODY_Y = 10;
+    double body_x = INITIAL_BODY_X;
+    double body_y = INITIAL_BODY_Y;
+    Leg front_left, front_right, back_left, back_right;
 
 public:
     Quad(motor& front_left_hip, motor& front_left_knee,
          motor& front_right_hip, motor& front_right_knee,
          motor& back_left_hip, motor& back_left_knee,
-         motor& back_right_hip, motor& back_right_knee)
+         motor& back_right_hip, motor& back_right_knee) :
+         front_left{front_left_hip, front_left_knee},
+         front_right{front_right_hip, front_left_knee},
+         back_left{back_left_hip, back_left_knee},
+         back_right{back_right_hip, back_right_knee} {
+        update_body();
+    }
+
+    void update_body() {
+        front_left.set_foot_position(-body_x, -body_y);
+        front_right.set_foot_position(-body_x, -body_y);
+        back_left.set_foot_position(-body_x, -body_y);
+        back_right.set_foot_position(-body_x, -body_y);
+        front_left.update_leg();
+        front_right.update_leg();
+        back_left.update_leg();
+        back_right.update_leg();
+    }
+}
+
+int main() {
+    Quad quad{motor_1, motor_2,
+              motor_3, motor_4,
+              motor_11, motor_12,
+              motor_13, motor_14};
 }
