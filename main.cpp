@@ -8,13 +8,15 @@
 
 #include <cmath>
 
+constexpr double RAD_TO_DEG_MULT = 180.0/3.141592653589793238463;
+
 class Leg {
     const double LEG_PART_LENGTH = 6.4375;
     double hip_angle, knee_angle;
     motor& hip_motor, knee_motor;
 
     void set_overall_leg(double length, double angle) {
-        knee_angle = 2 * asin(length / (2 * LEG_PART_LENGTH)) * (180.0/3.141592653589793238463);
+        knee_angle = 2 * asin(length / (2 * LEG_PART_LENGTH)) * RAD_TO_DEG_MULT;
         hip_angle = 90 - knee_angle / 2;
         knee_angle -= 180.0;    // So the angle is 0 when the leg is straight
         knee_angle *= -1.0;     // Knee typically bends backwards
@@ -26,7 +28,7 @@ public:
 
     void set_foot_position(double x, double y) {
         double overall_leg_length = sqrt(x*x + y*y);
-        double overall_leg_angle = atan(x / -y) * (180.0/3.141592653589793238463);
+        double overall_leg_angle = atan(x / -y) * RAD_TO_DEG_MULT;
         set_overall_leg(overall_leg_length, overall_leg_angle);
     }
 
