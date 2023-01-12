@@ -13,6 +13,7 @@ constexpr double RAD_TO_DEG_MULT = 180.0/3.141592653589793238463;
 class Leg {
     const double LEG_PART_LENGTH = 6.4375;
     double hip_angle, knee_angle;
+    double x, y;
     motor& hip_motor, knee_motor;
 
     void set_overall_leg(double length, double angle) {
@@ -43,6 +44,8 @@ class Quad {
     const double INITIAL_BODY_Y = 10;
     double body_x = INITIAL_BODY_X;
     double body_y = INITIAL_BODY_Y;
+    double track_width = 12;  // TODO: Change
+    double wheelbase = 12;    // TODO: Change
     Leg front_left, front_right, back_left, back_right;
 
 public:
